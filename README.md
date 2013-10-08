@@ -1,4 +1,4 @@
 Big Data Project
 ================
 
-Under construction :P
+Project under construction.
