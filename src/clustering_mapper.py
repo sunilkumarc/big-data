@@ -1,20 +1,12 @@
-import sqlite3
+#!/usr/bin/env python
+
 import sys
 
-connection = None
+for line in sys.stdin:
+    line = line.strip()
+    columns = line.split("\t")
+    
+    # for column in columns:
+    #     print '%s\t%s' % (column, 1)
+    print "%s\t%s" % (columns[0], columns[1])
 
-def emit():
-    try:
-        connection = sqlite3.connect('../database/database.db')
-        query = connection.cursor()    
-        query.execute('SELECT * from locations')
-        data = query.fetchall()
-        for column in data:
-            print "%s\t%s" % (column[0], [column[2], column[3]])
-        
-    except sqlite3.Error, e:
-        print "Error %s:" % e.args[0]
-        sys.exit(1)
-
-if __name__=='__main__':
-    emit()
