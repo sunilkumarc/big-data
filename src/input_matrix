@@ -1,0 +1,10 @@
+type: U
+%%
+A
+B
+A,B:2
+C
+A,C:3
+D
+B,D:2
+A,D:4
