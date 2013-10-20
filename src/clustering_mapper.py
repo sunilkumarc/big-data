@@ -8,5 +8,5 @@ for line in sys.stdin:
     
     # for column in columns:
     #     print '%s\t%s' % (column, 1)
-    print "%s\t%s" % (columns[0], columns[1])
+    print "%s\t%s\t%s\t%s" % (columns[0], columns[1], columns[2], columns[3])
 

@@ -2,8 +2,22 @@
 
 import sys
 
-for line in sys.stdin:
-	line = line.strip()
-	city, location = line.split('\t')
-	
-	print '%s\t%s' % (city, location)
+location_ids = []
+coordinates = []
+def fun():
+	for line in sys.stdin:
+		line = line.strip()
+		city, location_id, latitude, longitude = line.split('\t')
+		location_ids.append(location_id)
+
+		coordinate = []
+		coordinate.append(latitude)
+		coordinate.append(longitude)
+		coordinates.append(coordinate)
+		#print '%s' % (city)
+
+	#print location_ids
+	print coordinates
+
+if __name__=='__main__':
+	fun()
