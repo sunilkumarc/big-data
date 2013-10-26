@@ -8,25 +8,9 @@ from sklearn.cluster import DBSCAN
 location_ids = []
 coordinates = []
 distance_matrix = []
-similarity_matrix = []
-db = []
 
 def get_data():
-	global location_ids
-	for line in sys.stdin:
-		line = line.strip()
-		location_id, city, latitude, longitude = line.split('\t')
-		location_ids.append(location_id)
-
-		coordinate = []
-		coordinate.append(latitude)
-		coordinate.append(longitude)
-		coordinates.append(coordinate)
-		#print '%s' % (city)
-
-	#print location_ids
-	# print coordinates
-	# print location_ids
+	coordinates =  [[  9.31814191 ,  3.05936398],[ 11.33116579 ,  3.49705635],[  7.40307657 , -8.3921121 ],[ -5.7490319  ,  9.35116312],[  8.70727802 , -6.86474419],[  8.90656607 , -7.08469764],[ 10.87461195  , 1.83111066],[ -4.99664395 ,  9.21298913],[ -3.86794767 ,  9.58207358],[  7.47731822 , -7.10745072],[ -4.98751978 , 10.70935837],[ 10.30312819   ,3.45629108],[  9.32730694  ,-6.06141136],[ 10.71365374   ,3.05349328],[ -3.2448011 ,9.94528279]]
 
 def calculate_distance(lat1, long1, lat2, long2):
 	lat1, long1, lat2, long2 = map(radians, [lat1, long1, lat2, long2])
@@ -58,28 +42,16 @@ def calculate_distance_matrix():
 
 def cluster():
 	global distance_matrix
-	global similarity_matrix
-	global db
 	distance_matrix = np.array(distance_matrix)
-	similarity_matrix = 1 - (distance_matrix/(np.max(distance_matrix)))
-	db = DBSCAN(eps=0.2, min_samples=2).fit_predict(similarity_matrix)
-	# print db
+	similarity_matrix = 1 - (distance_matrix/(np.max(distance_matrix))
+	db = DBSCAN().fit_predict(similarity_matrix)
+	print db
 
-def emit():
-	for i in range(0, len(location_ids)):
-		print '%d\t%d' % (int(location_ids[i]), db[i])
 
 def reducer():
 	get_data()
 	calculate_distance_matrix()
 	cluster()
-	emit()
-	'''
-	for i in range(0, len(coordinates)):
-		for j in range(0, len(coordinates)):
-			print '%.2f\t' % similarity_matrix[i][j],
-		print
-	'''
-	
+
 if __name__=='__main__':
 	reducer()
