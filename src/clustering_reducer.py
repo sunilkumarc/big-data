@@ -22,11 +22,7 @@ def get_data():
 		coordinate.append(latitude)
 		coordinate.append(longitude)
 		coordinates.append(coordinate)
-		#print '%s' % (city)
 
-	#print location_ids
-	# print coordinates
-	# print location_ids
 
 def calculate_distance(lat1, long1, lat2, long2):
 	lat1, long1, lat2, long2 = map(radians, [lat1, long1, lat2, long2])
@@ -36,6 +32,7 @@ def calculate_distance(lat1, long1, lat2, long2):
 	c = 2 * asin(sqrt(a)) 
 	km = 6367 * c
 	return km
+
 
 def calculate_distance_matrix():
 	global distance_matrix
@@ -63,17 +60,18 @@ def cluster():
 	distance_matrix = np.array(distance_matrix)
 	similarity_matrix = 1 - (distance_matrix/(np.max(distance_matrix)))
 	db = DBSCAN(eps=0.2, min_samples=2).fit_predict(similarity_matrix)
-	# print db
 
 def emit():
 	for i in range(0, len(location_ids)):
 		print '%d\t%d' % (int(location_ids[i]), db[i])
+		
 
 def reducer():
 	get_data()
 	calculate_distance_matrix()
 	cluster()
 	emit()
+	
 	'''
 	for i in range(0, len(coordinates)):
 		for j in range(0, len(coordinates)):
