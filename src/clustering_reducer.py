@@ -10,9 +10,11 @@ coordinates = []
 distance_matrix = []
 similarity_matrix = []
 db = []
+cities = []
 
 def get_data():
 	global location_ids
+	global city
 	for line in sys.stdin:
 		line = line.strip()
 		location_id, city, latitude, longitude = line.split('\t')
@@ -22,6 +24,7 @@ def get_data():
 		coordinate.append(latitude)
 		coordinate.append(longitude)
 		coordinates.append(coordinate)
+		cities.append(city)
 
 
 def calculate_distance(lat1, long1, lat2, long2):
@@ -63,8 +66,8 @@ def cluster():
 
 def emit():
 	for i in range(0, len(location_ids)):
-		print '%d\t%d' % (int(location_ids[i]), db[i])
-		
+		print '%d\t%s\t%d' % (int(location_ids[i]), cities[i], db[i])
+	print '%d\t%d\t%d' % (-1, -1, -1)
 
 def reducer():
 	get_data()
