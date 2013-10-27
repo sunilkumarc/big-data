@@ -74,12 +74,5 @@ def reducer():
 	cluster()
 	emit()
 	
-	'''
-	for i in range(0, len(coordinates)):
-		for j in range(0, len(coordinates)):
-			print '%.2f\t' % similarity_matrix[i][j],
-		print
-	'''
-	
 if __name__=='__main__':
 	reducer()
