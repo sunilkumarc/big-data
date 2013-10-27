@@ -9,8 +9,8 @@ def emit():
 		record = line.split('\t')
 		if len(record) == 3:
 			print '%s\t%s\t%s' % (record[0], record[1], record[2])
-		elif len(record) == 4:
-			print '%s\t%s\t%s\t%s' % (record[0], record[1], record[2], record[3])
+		elif len(record) == 5:
+			print '%s\t%s\t%s\t%s\t%s' % (record[0], record[1], record[2], record[3], record[4])
 
 def mapper():
 	emit()

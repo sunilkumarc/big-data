@@ -35,7 +35,8 @@ def generate_users():
 		i = random.randint(0, len(first_name)-1)
 		j = random.randint(0, len(last_name)-1)
 		k = random.randint(0, len(cities)-1)
-		line = str(user_id) + '\t' + first_name[i] + '\t' + last_name[j] + '\t' + cities[k] + '\n'
+		age = random.randint(10, 60)
+		line = str(user_id) + '\t' + first_name[i] + '\t' + last_name[j] + '\t' + cities[k] + '\t' + str(age) + '\n'
 		user_database.write(line)
 
 if __name__=='__main__':
