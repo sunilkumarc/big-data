@@ -67,7 +67,6 @@ def cluster():
 def emit():
 	for i in range(0, len(location_ids)):
 		print '%d\t%s\t%d' % (int(location_ids[i]), cities[i], db[i])
-	print '%d\t%d\t%d' % (-1, -1, -1)
 
 def reducer():
 	get_data()

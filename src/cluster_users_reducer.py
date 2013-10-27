@@ -1,29 +1,30 @@
 #!/usr/bin/env python
+
 import sys
 
-cities_cluster = {}
+city_clusters = {}
+user_records = []
 
 def get_data():
-	# Need to change this also.
-	global cities_cluster
+	global city_clusters
+	global user_records
 
 	for line in sys.stdin:
-	    line = line.strip()
-	    # city_id, city, cluster = line.split('\t')
-	    # if city_id == '-1' and city == '-1' and cluster == '-1':
-	    # 	break
-	    # else:
-	    # 	cities_cluster[city] = cluster
-	    print line
+		line = line.strip()
+		record = []
+		record = line.split('\t')
+		if len(record) == 3:
+			city_clusters[record[1]] = record[2]
+		else:
+			user_records.append(record)
 
-	# for line in sys.stdin:
-	# 	line = line.strip()
-	# 	user_id, first, last, city = line.split('\t')
-	# 	print '%s\t%s\t%s\t%s' % (user_id, first, last, city)
+def cluster_users():
+	for record in range(0, len(user_records)):
+		print '%s\t%s' % (user_records[record], city_clusters[user_records[record][3]])
 
 def reducer():
 	get_data()
-	# print cities_cluster
+	cluster_users()
 
 if __name__=='__main__':
 	reducer()
