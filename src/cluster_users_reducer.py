@@ -20,7 +20,8 @@ def get_data():
 
 def cluster_users():
 	for record in range(0, len(user_records)):
-		print '%s\t%s' % (user_records[record], city_clusters[user_records[record][3]])
+		print '%s\t%s\t%s\t%s\t%s\t%s' % (user_records[record][0], user_records[record][1], 
+			user_records[record][2], user_records[record][3], user_records[record][4], city_clusters[user_records[record][3]])
 
 def reducer():
 	get_data()
