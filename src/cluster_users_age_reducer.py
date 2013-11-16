@@ -1,11 +1,25 @@
 #!/usr/bin/env python
 import sys
+import json
+from pprint import pprint
+import random
+
+adds = {
+	"0-15":["Advertisement1(0-15)", "Advertisement2(0-15)", "Advertisement3(0-15)", "Advertisement4(0-15)", "Advertisement5(0-15)"],
+	"16-30":["Advertisement1(16-30)", "Advertisement2(16-30)", "Advertisement3(16-30)", "Advertisement4(16-30)", "Advertisement5(16-30)"],
+	"31-50":["Advertisement1(31-50)", "Advertisement2(31-50)", "Advertisement3(31-50)", "Advertisement4(31-50)", "Advertisement5(31-50)"],
+	"gt-50":["Advertisement1(gt-50)", "Advertisement2(gt-50)", "Advertisement3(gt-50)", "Advertisement4(gt-50)", "Advertisement5(gt-50)"]
+}
 
 user_records = []
 user_ids = []
 cluster_ids = []
 distance_matrix = []
 main_clusters = []
+age_0_15 = []
+age_16_30 = []
+age_31_50 = []
+age_gt_50 = []
 
 def get_data():
 	global user_records
@@ -35,12 +49,12 @@ def process_records():
 			each_cluster.append(user_records[i])
 			previous_id = current_id
 	
-def test():
+def make_age_clusters():
 	for i in range(1, len(main_clusters)):
-		age_0_15 = []
-		age_16_30 = []
-		age_31_50 = []
-		age_gt_50 = []
+		global age_0_15
+		global age_16_30
+		global age_31_50
+		global age_gt_50
 		for row in main_clusters[i]:
 			if int(row[4]) <= 15:
 				age_0_15.append(row)
@@ -50,12 +64,24 @@ def test():
 				age_31_50.append(row)
 			else:
 				age_gt_50.append(row)
-	
+
+		print 'Cluster - ', i
+		add_0_15 = adds['0-15']
+		print 'Age group (0-15) : ', add_0_15[random.randint(0, len(add_0_15)-1)]
+
+		add_16_30 = adds['16-30']
+		print 'Age group (16-30) : ', add_16_30[random.randint(0, len(add_16_30)-1)]
+
+		add_31_50 = adds['31-50']
+		print 'Age group (31-50) : ', add_31_50[random.randint(0, len(add_31_50)-1)]
+		
+		add_gt_50 = adds['gt-50']
+		print 'Age group (gt-50) : ', add_gt_50[random.randint(0, len(add_gt_50)-1)]
 
 def reducer():
 	get_data()
 	process_records()
-	test()
+	make_age_clusters()
 
 if __name__=='__main__':
 	reducer()
