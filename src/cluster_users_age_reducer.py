@@ -17,7 +17,6 @@ def get_data():
 		line = line.split('\t')
 		cluster_id = line[0]
 		user_record = line[1:]
-		print user_record
 		cluster_ids.append(cluster_id)
 		user_records.append(user_record)
 		
@@ -35,11 +34,28 @@ def process_records():
 			each_cluster = []
 			each_cluster.append(user_records[i])
 			previous_id = current_id
+	
+def test():
+	for i in range(1, len(main_clusters)):
+		age_0_15 = []
+		age_16_30 = []
+		age_31_50 = []
+		age_gt_50 = []
+		for row in main_clusters[i]:
+			if int(row[4]) <= 15:
+				age_0_15.append(row)
+			elif int(row[4]) <= 30:
+				age_16_30.append(row)
+			elif int(row[4]) <= 50:
+				age_31_50.append(row)
+			else:
+				age_gt_50.append(row)
+	
 
 def reducer():
 	get_data()
 	process_records()
+	test()
 
 if __name__=='__main__':
 	reducer()
-
