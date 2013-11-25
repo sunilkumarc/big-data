@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import random
 import sys
 
@@ -27,17 +29,17 @@ def get_data():
 def generate_users():
 	try:
 		no_of_users = int(sys.argv[1])
-	except IndexError:
-		print 'Enter no of users to generate'
+		user_database = open('user_database', 'w')
 		
-	user_database = open('user_database', 'w')
-	for user_id in range(1, no_of_users+1):
-		i = random.randint(0, len(first_name)-1)
-		j = random.randint(0, len(last_name)-1)
-		k = random.randint(0, len(cities)-1)
-		age = random.randint(10, 60)
-		line = str(user_id) + '\t' + first_name[i] + '\t' + last_name[j] + '\t' + cities[k] + '\t' + str(age) + '\n'
-		user_database.write(line)
+		for user_id in range(1, no_of_users+1):
+			i = random.randint(0, len(first_name)-1)
+			j = random.randint(0, len(last_name)-1)
+			k = random.randint(0, len(cities)-1)
+			age = random.randint(10, 60)
+			line = str(user_id) + '\t' + first_name[i] + '\t' + last_name[j] + '\t' + cities[k] + '\t' + str(age) + '\n'
+			user_database.write(line)
+	except IndexError:
+		print 'Enter no of users to generate database'
 
 if __name__=='__main__':
 	get_data()
